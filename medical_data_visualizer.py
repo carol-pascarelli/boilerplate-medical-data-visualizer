@@ -31,7 +31,7 @@ def draw_cat_plot():
     
 
     # 7
-    df_cat = df_cat = df_cat.groupby(['cardio', 'variable', 'value'], as_index=False).count()
+    df_cat = df_cat.groupby(['cardio', 'variable', 'value'], as_index=False).count()
 
 
 
@@ -60,7 +60,8 @@ def draw_heat_map():
     corr = df_heat.corr(method='pearson')
 
     # 13
-    mask = np.triu(corr)
+    mask = np.zeros_like(corr)
+    mask[np.triu_indices_from(mask)] = True
 
 
 
@@ -68,7 +69,7 @@ def draw_heat_map():
     fig, ax = plt.subplots(figsize=(12, 8))
 
     # 15
-    sns.heatmap(corr, linewidths=1, annot=True, square= True, mask =mask, fmt ='.1f', center=0.08, cbar_kws={'shrink':0,5})
+    sns.heatmap(corr, linewidths=1, annot=True, square= True, mask =mask, fmt ='.1f', center=0.08, cbar_kws={'shrink':0.5})
 
 
     # 16
